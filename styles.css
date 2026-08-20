@@ -2496,3 +2496,55 @@ footer {
     margin: 18px auto 0;
     text-align: center;
 }
+/* PÁGINAS LEGALES */
+
+.legal-page {
+    padding-top: 150px;
+    padding-bottom: 120px;
+}
+
+.legal-content {
+    max-width: 850px;
+}
+
+.legal-content h2 {
+    margin-top: 45px;
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.legal-content h2:first-child {
+    margin-top: 0;
+}
+
+.legal-content p {
+    max-width: 800px;
+    margin-bottom: 18px;
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+.legal-content a {
+    color: var(--dark);
+    font-weight: 600;
+}
+
+@media (max-width: 700px) {
+
+    .legal-page {
+        padding: 120px 6% 80px;
+    }
+
+    .legal-content h2 {
+        font-size: 21px;
+        margin-top: 35px;
+    }
+
+    .legal-content p {
+        font-size: 15px;
+    }
+
+}
