@@ -1,118 +1,156 @@
-const elements = document.querySelectorAll(
-    ".service-card, .approach-step, .sector, .principle"
-);
+// ==========================================
+// ANIMACIONES AL HACER SCROLL
+// ==========================================
 
+const revealElements = document.querySelectorAll(".reveal");
 
-const observer = new IntersectionObserver(
-    (entries) => {
+if (revealElements.length > 0) {
 
-        entries.forEach((entry) => {
+    const revealObserver = new IntersectionObserver(
+        function (entries) {
 
-            if (entry.isIntersecting) {
+            entries.forEach(function (entry) {
 
-                entry.target.classList.add("visible");
+                if (entry.isIntersecting) {
 
-                observer.unobserve(entry.target);
+                    entry.target.classList.add("visible");
 
-            }
+                    revealObserver.unobserve(entry.target);
 
-        });
+                }
 
-    },
-    {
-        threshold: 0.15
-    }
-);
+            });
 
+        },
+        {
+            threshold: 0.15
+        }
+    );
 
-elements.forEach((element) => {
+    revealElements.forEach(function (element) {
 
-    element.classList.add("reveal");
-
-    observer.observe(element);
-
-});
-const menuToggle = document.querySelector(".menu-toggle");
-
-const mainNav = document.querySelector(".main-nav");
-
-
-menuToggle.addEventListener("click", () => {
-
-    mainNav.classList.toggle("open");
-
-});
-const navLinks = document.querySelectorAll(".main-nav a");
-
-
-navLinks.forEach((link) => {
-
-    link.addEventListener("click", () => {
-
-        mainNav.classList.remove("open");
+        revealObserver.observe(element);
 
     });
 
-});
+}
+
+
+// ==========================================
+// FORMULARIO DE CONTACTO
+// ==========================================
+
 const contactForm = document.getElementById("contact-form");
 
 if (contactForm) {
 
     contactForm.addEventListener("submit", function (event) {
 
-    event.preventDefault();
+        event.preventDefault();
 
-    const successMessage = document.getElementById("form-success");
+        const successMessage =
+            document.getElementById("form-success");
 
-    successMessage.classList.add("visible");
+        if (successMessage) {
 
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-    const location = document.getElementById("location").value;
-    const service = document.getElementById("service").value;
-    const project = document.getElementById("project").value;
+            successMessage.classList.add("visible");
 
-    const subject = "Consulta de seguridad - LULIA";
+        }
 
-    const body =
-        "Nueva consulta recibida desde la web de LULIA.%0D%0A%0D%0A" +
-        "Nombre: " + encodeURIComponent(name) + "%0D%0A" +
-        "Email: " + encodeURIComponent(email) + "%0D%0A" +
-        "Teléfono: " + encodeURIComponent(phone) + "%0D%0A" +
-        "Ubicación: " + encodeURIComponent(location) + "%0D%0A" +
-        "Servicio: " + encodeURIComponent(service) + "%0D%0A%0D%0A" +
-        "Proyecto:%0D%0A" +
-        encodeURIComponent(project);
 
-    window.location.href =
-        "mailto:info@lulia.com" +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + body;
+        const name =
+            document.getElementById("name").value;
 
-});
+        const email =
+            document.getElementById("email").value;
+
+        const phone =
+            document.getElementById("phone").value;
+
+        const location =
+            document.getElementById("location").value;
+
+        const service =
+            document.getElementById("service").value;
+
+        const project =
+            document.getElementById("project").value;
+
+
+        const subject =
+            "Consulta de seguridad - LULIA";
+
+
+        const body =
+            "Nueva consulta recibida desde la web de LULIA.%0D%0A%0D%0A" +
+            "Nombre: " + encodeURIComponent(name) + "%0D%0A" +
+            "Email: " + encodeURIComponent(email) + "%0D%0A" +
+            "Teléfono: " + encodeURIComponent(phone) + "%0D%0A" +
+            "Ubicación: " + encodeURIComponent(location) + "%0D%0A" +
+            "Servicio: " + encodeURIComponent(service) + "%0D%0A%0D%0A" +
+            "Proyecto:%0D%0A" +
+            encodeURIComponent(project);
+
+
+        window.location.href =
+            "mailto:info@lulia.com" +
+            "?subject=" +
+            encodeURIComponent(subject) +
+            "&body=" +
+            body;
+
+    });
 
 }
-// MENÚ MÓVIL
 
-const menuToggle = document.querySelector(".menu-toggle");
-const mainNav = document.querySelector(".main-nav");
+
+// ==========================================
+// MENÚ MÓVIL
+// ==========================================
+
+const menuToggle =
+    document.querySelector(".menu-toggle");
+
+const mainNav =
+    document.querySelector(".main-nav");
+
 
 if (menuToggle && mainNav) {
+
 
     menuToggle.addEventListener("click", function () {
 
         mainNav.classList.toggle("open");
 
-const isOpen = mainNav.classList.contains("open");
+        const isOpen =
+            mainNav.classList.contains("open");
 
-menuToggle.setAttribute("aria-expanded", isOpen);
-menuToggle.textContent = isOpen ? "×" : "☰";
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            isOpen
+        );
+
+
+        menuToggle.setAttribute(
+            "aria-label",
+            isOpen
+                ? "Cerrar menú"
+                : "Abrir menú"
+        );
+
+
+        menuToggle.textContent =
+            isOpen
+                ? "×"
+                : "☰";
 
     });
 
 
-    const navLinks = mainNav.querySelectorAll("a");
+    const navLinks =
+        mainNav.querySelectorAll("a");
+
 
     navLinks.forEach(function (link) {
 
@@ -120,9 +158,19 @@ menuToggle.textContent = isOpen ? "×" : "☰";
 
             mainNav.classList.remove("open");
 
-menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
 
-menuToggle.textContent = "☰";
+
+            menuToggle.setAttribute(
+                "aria-label",
+                "Abrir menú"
+            );
+
+
+            menuToggle.textContent = "☰";
 
         });
 
