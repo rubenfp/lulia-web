@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lulia-web.rubenefep.workers.dev/sitemap.xml

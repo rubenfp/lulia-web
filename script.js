@@ -28,9 +28,7 @@ if (revealElements.length > 0) {
     );
 
     revealElements.forEach(function (element) {
-
         revealObserver.observe(element);
-
     });
 
 }
@@ -40,64 +38,95 @@ if (revealElements.length > 0) {
 // FORMULARIO DE CONTACTO
 // ==========================================
 
-const contactForm = document.getElementById("contact-form");
+const contactForm = document.getElementById("contactForm");
 
 if (contactForm) {
 
-    contactForm.addEventListener("submit", function (event) {
+    contactForm.addEventListener("submit", async function (event) {
 
         event.preventDefault();
 
-        const successMessage =
-            document.getElementById("form-success");
+        const submitButton =
+            contactForm.querySelector("button[type='submit']");
 
-        if (successMessage) {
+        const originalText =
+            submitButton.textContent;
 
-            successMessage.classList.add("visible");
+        submitButton.disabled = true;
+        submitButton.textContent = "Enviando...";
+
+        const formData =
+            new FormData(contactForm);
+
+        const data = {
+
+            name: formData.get("name"),
+
+            email: formData.get("email"),
+
+            phone: formData.get("phone"),
+
+            location: formData.get("location"),
+
+            service: formData.get("service"),
+
+            project: formData.get("project")
+
+        };
+
+
+        try {
+
+            const response =
+                await fetch("/api/contact", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify(data)
+
+                });
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Error al enviar el formulario"
+                );
+
+            }
+
+
+            contactForm.reset();
+
+
+            alert(
+                "Gracias. Hemos recibido tu consulta y nos pondremos en contacto contigo."
+            );
+
+
+        } catch (error) {
+
+            console.error(error);
+
+
+            alert(
+                "No hemos podido enviar la consulta. " +
+                "Por favor, inténtalo de nuevo o escríbenos a info@lulia.com."
+            );
+
+
+        } finally {
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                originalText;
 
         }
-
-
-        const name =
-            document.getElementById("name").value;
-
-        const email =
-            document.getElementById("email").value;
-
-        const phone =
-            document.getElementById("phone").value;
-
-        const location =
-            document.getElementById("location").value;
-
-        const service =
-            document.getElementById("service").value;
-
-        const project =
-            document.getElementById("project").value;
-
-
-        const subject =
-            "Consulta de seguridad - LULIA";
-
-
-        const body =
-            "Nueva consulta recibida desde la web de LULIA.%0D%0A%0D%0A" +
-            "Nombre: " + encodeURIComponent(name) + "%0D%0A" +
-            "Email: " + encodeURIComponent(email) + "%0D%0A" +
-            "Teléfono: " + encodeURIComponent(phone) + "%0D%0A" +
-            "Ubicación: " + encodeURIComponent(location) + "%0D%0A" +
-            "Servicio: " + encodeURIComponent(service) + "%0D%0A%0D%0A" +
-            "Proyecto:%0D%0A" +
-            encodeURIComponent(project);
-
-
-        window.location.href =
-            "mailto:info@lulia.com" +
-            "?subject=" +
-            encodeURIComponent(subject) +
-            "&body=" +
-            body;
 
     });
 
@@ -117,35 +146,37 @@ const mainNav =
 
 if (menuToggle && mainNav) {
 
+    menuToggle.addEventListener(
+        "click",
+        function () {
 
-    menuToggle.addEventListener("click", function () {
+            mainNav.classList.toggle("open");
 
-        mainNav.classList.toggle("open");
-
-        const isOpen =
-            mainNav.classList.contains("open");
-
-
-        menuToggle.setAttribute(
-            "aria-expanded",
-            isOpen
-        );
+            const isOpen =
+                mainNav.classList.contains("open");
 
 
-        menuToggle.setAttribute(
-            "aria-label",
-            isOpen
-                ? "Cerrar menú"
-                : "Abrir menú"
-        );
+            menuToggle.setAttribute(
+                "aria-expanded",
+                isOpen
+            );
 
 
-        menuToggle.textContent =
-            isOpen
-                ? "×"
-                : "☰";
+            menuToggle.setAttribute(
+                "aria-label",
+                isOpen
+                    ? "Cerrar menú"
+                    : "Abrir menú"
+            );
 
-    });
+
+            menuToggle.textContent =
+                isOpen
+                    ? "×"
+                    : "☰";
+
+        }
+    );
 
 
     const navLinks =
@@ -154,25 +185,30 @@ if (menuToggle && mainNav) {
 
     navLinks.forEach(function (link) {
 
-        link.addEventListener("click", function () {
+        link.addEventListener(
+            "click",
+            function () {
 
-            mainNav.classList.remove("open");
-
-            menuToggle.setAttribute(
-                "aria-expanded",
-                "false"
-            );
+                mainNav.classList.remove("open");
 
 
-            menuToggle.setAttribute(
-                "aria-label",
-                "Abrir menú"
-            );
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
 
 
-            menuToggle.textContent = "☰";
+                menuToggle.setAttribute(
+                    "aria-label",
+                    "Abrir menú"
+                );
 
-        });
+
+                menuToggle.textContent =
+                    "☰";
+
+            }
+        );
 
     });
 
