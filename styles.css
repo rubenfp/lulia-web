@@ -4910,3 +4910,144 @@ header .main-nav.open a:nth-child(5) {
 }
 
 }
+/* =====================================================
+   LULIA — TIPOGRAFÍA HEADER
+   ===================================================== */
+
+header,
+header .brand,
+header .main-nav,
+header .main-nav a,
+header .nav-contact,
+header .menu-toggle {
+    font-family: "Manrope", sans-serif;
+}
+
+header .main-nav a {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.1px;
+}
+
+header .nav-contact {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+/* =====================================================
+   HEADER — HOVER PREMIUM
+   ===================================================== */
+
+header .main-nav a {
+    position: relative;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* Línea animada */
+
+header .main-nav a:not(.nav-contact)::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -8px;
+
+    width: 0;
+    height: 2px;
+
+    background: #86bc25;
+
+    transition:
+        width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* Enlaces normales */
+
+header .main-nav a:not(.nav-contact):hover {
+    color: #86bc25;
+
+    transform: translateY(-1px);
+}
+
+
+header .main-nav a:not(.nav-contact):hover::after {
+    width: 100%;
+}
+
+
+/* =====================================================
+   CONTACTAR
+   ===================================================== */
+
+header .nav-contact {
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+header .nav-contact:hover {
+    background: #ff0000;
+
+    color: #101820;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+/* =====================================================
+   HERO — BOTÓN HABLEMOS
+   ===================================================== */
+
+.hero .hero-buttons .button {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 50px;
+
+    padding: 0 28px;
+
+    background: #86bc25;
+
+    color: #101820;
+
+    border: 1px solid #86bc25;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.hero .hero-buttons .button:hover {
+    background: #ffffff;
+
+    color: #101820;
+
+    border-color: #ffffff;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.22);
+}
