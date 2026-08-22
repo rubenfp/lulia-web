@@ -4792,3 +4792,36 @@ header .brand-logo {
 
     object-fit: contain;
 }
+/* =====================================================
+   MENÚ MÓVIL — CONTRASTE
+   ===================================================== */
+
+@media (max-width: 800px) {
+
+    header .main-nav {
+        background: #101820;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    header .main-nav a {
+        color: #ffffff;
+        background: #101820;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    header .main-nav a:hover {
+        color: #86bc25;
+        background: #101820;
+    }
+
+    header .main-nav .nav-contact {
+        color: #101820;
+        background: #86bc25;
+    }
+
+    header .main-nav .nav-contact:hover {
+        color: #101820;
+        background: #ffffff;
+    }
+
+}
